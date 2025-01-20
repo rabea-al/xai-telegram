@@ -1,0 +1,576 @@
+{
+    "id": "1fee8d72-d179-48fd-813a-9060aec07da9",
+    "offsetX": 56.121644723470396,
+    "offsetY": 76.95853658536585,
+    "zoom": 90,
+    "gridSize": 0,
+    "layers": [
+        {
+            "id": "213505f4-5a40-4785-951a-396c3f8f74ef",
+            "type": "diagram-links",
+            "isSvg": true,
+            "transformed": true,
+            "models": {
+                "784991d8-a164-4407-9ed6-bd218e03bed9": {
+                    "id": "784991d8-a164-4407-9ed6-bd218e03bed9",
+                    "type": "triangle-link",
+                    "selected": false,
+                    "source": "6a8d6fa7-6397-42e9-baf3-8a04e4001a5a",
+                    "sourcePort": "def8ca1a-3ea4-48e0-af90-5914a3e1cfb0",
+                    "target": "2a537ec5-5a74-403b-a4de-2fe26703904e",
+                    "targetPort": "5c7123db-376e-4062-ad99-c4b7acebead6",
+                    "points": [
+                        {
+                            "id": "e233fed6-b12d-4972-bd76-a87cae9dab9e",
+                            "type": "point",
+                            "x": 106.75001913965257,
+                            "y": 114.09999904787638
+                        },
+                        {
+                            "id": "315313e6-b5b6-40e2-b933-d3969e11f7f5",
+                            "type": "point",
+                            "x": 154.69998387489562,
+                            "y": 212.10001261124444
+                        }
+                    ],
+                    "labels": [],
+                    "width": 3,
+                    "color": "gray",
+                    "curvyness": 50,
+                    "selectedColor": "rgb(0,192,255)"
+                },
+                "db6ede42-7bab-4ee6-abbe-4626cb36f862": {
+                    "id": "db6ede42-7bab-4ee6-abbe-4626cb36f862",
+                    "type": "triangle-link",
+                    "selected": false,
+                    "source": "2a537ec5-5a74-403b-a4de-2fe26703904e",
+                    "sourcePort": "fc7243e7-3a78-416a-8fa3-e8cfca611d6c",
+                    "target": "8e6d3c97-b69b-4a3c-b4be-69a0d3912fd6",
+                    "targetPort": "9568ed04-6543-44d3-8f7a-c6c398b52292",
+                    "points": [
+                        {
+                            "id": "1fbc96d5-9508-4034-ae86-e469786312bf",
+                            "type": "point",
+                            "x": 342.52493462291534,
+                            "y": 212.10001261124444
+                        },
+                        {
+                            "id": "62c4bfb1-3ae6-469a-b7f7-2b221b1bf26e",
+                            "type": "point",
+                            "x": 405.7000374925849,
+                            "y": 256.10001939292846
+                        }
+                    ],
+                    "labels": [],
+                    "width": 3,
+                    "color": "gray",
+                    "curvyness": 50,
+                    "selectedColor": "rgb(0,192,255)"
+                },
+                "4cc3c05e-c04d-42f8-b05b-66ced99e434a": {
+                    "id": "4cc3c05e-c04d-42f8-b05b-66ced99e434a",
+                    "type": "triangle-link",
+                    "selected": false,
+                    "source": "8e6d3c97-b69b-4a3c-b4be-69a0d3912fd6",
+                    "sourcePort": "08f93a56-79bd-4ede-8685-40614f336f7d",
+                    "target": "10b6e181-296d-44e7-99e3-58ca1be6e611",
+                    "targetPort": "b87563dc-59db-49fb-a7f7-4017fde5ea61",
+                    "points": [
+                        {
+                            "id": "da94515c-075d-4ef7-94d2-d8b96c67a9d7",
+                            "type": "point",
+                            "x": 591.7124210595473,
+                            "y": 256.10001939292846
+                        },
+                        {
+                            "id": "8126c83d-66af-45d1-97dc-a5fabc61f611",
+                            "type": "point",
+                            "x": 660.7001053094253,
+                            "y": 253.10000582956042
+                        }
+                    ],
+                    "labels": [],
+                    "width": 3,
+                    "color": "gray",
+                    "curvyness": 50,
+                    "selectedColor": "rgb(0,192,255)"
+                },
+                "3441d03d-5d3c-4b1f-b48a-99876def517d": {
+                    "id": "3441d03d-5d3c-4b1f-b48a-99876def517d",
+                    "type": "triangle-link",
+                    "selected": false,
+                    "source": "10b6e181-296d-44e7-99e3-58ca1be6e611",
+                    "sourcePort": "41ba220e-1bb3-48f9-8e94-7d8f12892f10",
+                    "target": "e5c27120-aa89-4abd-9bef-1417c46d6e73",
+                    "targetPort": "f666ed63-909d-43d8-9ae8-fd9fad7970cb",
+                    "points": [
+                        {
+                            "id": "7515edbc-9bf1-4653-8c54-42b187b71f7a",
+                            "type": "point",
+                            "x": 799.7000781826891,
+                            "y": 253.10000582956042
+                        },
+                        {
+                            "id": "fd009d17-dc8e-4904-a3e2-f518fa09ba5e",
+                            "type": "point",
+                            "x": 871.099953399703,
+                            "y": 153.10000582956042
+                        }
+                    ],
+                    "labels": [],
+                    "width": 3,
+                    "color": "gray",
+                    "curvyness": 50,
+                    "selectedColor": "rgb(0,192,255)"
+                },
+                "135672c8-1af1-4e93-b07d-bf0a56d886da": {
+                    "id": "135672c8-1af1-4e93-b07d-bf0a56d886da",
+                    "type": "parameter-link",
+                    "selected": true,
+                    "source": "2a537ec5-5a74-403b-a4de-2fe26703904e",
+                    "sourcePort": "0f60460d-68e2-4eab-873f-a7c255af73c5",
+                    "target": "8e6d3c97-b69b-4a3c-b4be-69a0d3912fd6",
+                    "targetPort": "fce5d816-743f-4299-8961-86d52cf0ecbb",
+                    "points": [
+                        {
+                            "id": "dee006b2-b2dd-42ad-be1e-a5cbd076e0b6",
+                            "type": "point",
+                            "x": 342.52493462291534,
+                            "y": 233.69999413115545
+                        },
+                        {
+                            "id": "1cf22cba-819e-44f9-be7f-da309f96ac98",
+                            "type": "point",
+                            "x": 405.7000374925849,
+                            "y": 277.70000091283947
+                        }
+                    ],
+                    "labels": [],
+                    "width": 3,
+                    "color": "gray",
+                    "curvyness": 50,
+                    "selectedColor": "rgb(0,192,255)"
+                },
+                "02d9b4d9-ba07-4082-aedd-fc567e06bc77": {
+                    "id": "02d9b4d9-ba07-4082-aedd-fc567e06bc77",
+                    "type": "parameter-link",
+                    "selected": true,
+                    "source": "8e6d3c97-b69b-4a3c-b4be-69a0d3912fd6",
+                    "sourcePort": "ece0fb99-6513-43f1-ba58-a75602ff7d63",
+                    "target": "10b6e181-296d-44e7-99e3-58ca1be6e611",
+                    "targetPort": "934a5949-7e3f-47a0-a6b8-16e9c0680659",
+                    "points": [
+                        {
+                            "id": "5f6ebbad-2f36-4e40-9e69-ecfe8836c139",
+                            "type": "point",
+                            "x": 591.7124210595473,
+                            "y": 277.70000091283947
+                        },
+                        {
+                            "id": "1483a728-85f5-4eb1-aeb4-f979bcbc9fd9",
+                            "type": "point",
+                            "x": 660.7001053094253,
+                            "y": 274.7000212578916
+                        }
+                    ],
+                    "labels": [],
+                    "width": 3,
+                    "color": "gray",
+                    "curvyness": 50,
+                    "selectedColor": "rgb(0,192,255)"
+                }
+            }
+        },
+        {
+            "id": "70d54d99-d70e-4d3b-8a51-95c1d98cac03",
+            "type": "diagram-nodes",
+            "isSvg": false,
+            "transformed": true,
+            "models": {
+                "6a8d6fa7-6397-42e9-baf3-8a04e4001a5a": {
+                    "id": "6a8d6fa7-6397-42e9-baf3-8a04e4001a5a",
+                    "type": "custom-node",
+                    "selected": false,
+                    "extras": {
+                        "type": "Start",
+                        "borderColor": "rgb(0,192,255)"
+                    },
+                    "x": 39,
+                    "y": 77,
+                    "ports": [
+                        {
+                            "id": "def8ca1a-3ea4-48e0-af90-5914a3e1cfb0",
+                            "type": "default",
+                            "extras": {},
+                            "x": 96.45002392921691,
+                            "y": 103.80000383744073,
+                            "name": "out-0",
+                            "alignment": "right",
+                            "parentNode": "6a8d6fa7-6397-42e9-baf3-8a04e4001a5a",
+                            "links": [
+                                "784991d8-a164-4407-9ed6-bd218e03bed9"
+                            ],
+                            "in": false,
+                            "label": "▶",
+                            "varName": "▶",
+                            "portType": "",
+                            "dataType": ""
+                        }
+                    ],
+                    "name": "Start",
+                    "color": "rgb(255,102,102)",
+                    "portsInOrder": [],
+                    "portsOutOrder": [
+                        "def8ca1a-3ea4-48e0-af90-5914a3e1cfb0"
+                    ]
+                },
+                "e5c27120-aa89-4abd-9bef-1417c46d6e73": {
+                    "id": "e5c27120-aa89-4abd-9bef-1417c46d6e73",
+                    "type": "custom-node",
+                    "selected": false,
+                    "extras": {
+                        "type": "Finish"
+                    },
+                    "x": 860,
+                    "y": 116,
+                    "ports": [
+                        {
+                            "id": "f666ed63-909d-43d8-9ae8-fd9fad7970cb",
+                            "type": "default",
+                            "extras": {},
+                            "x": 860.7999316983141,
+                            "y": 142.80001061912478,
+                            "name": "in-0",
+                            "alignment": "left",
+                            "parentNode": "e5c27120-aa89-4abd-9bef-1417c46d6e73",
+                            "links": [
+                                "3441d03d-5d3c-4b1f-b48a-99876def517d"
+                            ],
+                            "in": true,
+                            "label": "▶",
+                            "varName": "▶",
+                            "portType": "",
+                            "dataType": ""
+                        },
+                        {
+                            "id": "da940fe5-727c-4cd2-a274-7e0136356ef0",
+                            "type": "default",
+                            "extras": {},
+                            "x": 860.7999316983141,
+                            "y": 164.40001333179836,
+                            "name": "parameter-dynalist-outputs",
+                            "alignment": "left",
+                            "parentNode": "e5c27120-aa89-4abd-9bef-1417c46d6e73",
+                            "links": [],
+                            "in": true,
+                            "label": "outputs",
+                            "varName": "outputs",
+                            "portType": "",
+                            "dataType": "dynalist",
+                            "dynaPortOrder": 0,
+                            "dynaPortRef": {
+                                "previous": null,
+                                "next": null
+                            }
+                        }
+                    ],
+                    "name": "Finish",
+                    "color": "rgb(255,102,102)",
+                    "portsInOrder": [
+                        "f666ed63-909d-43d8-9ae8-fd9fad7970cb",
+                        "da940fe5-727c-4cd2-a274-7e0136356ef0"
+                    ],
+                    "portsOutOrder": []
+                },
+                "2a537ec5-5a74-403b-a4de-2fe26703904e": {
+                    "id": "2a537ec5-5a74-403b-a4de-2fe26703904e",
+                    "type": "custom-node",
+                    "selected": false,
+                    "extras": {
+                        "type": "library_component",
+                        "path": "xai_components/xai_telegram/telegram_core_components.py",
+                        "description": "Initializes a Telegram Application using python-telegram-bot.\n\n##### inPorts:\n- telegram_token (str): The Bot API token from BotFather.\n\n##### outPorts:\n- application (object): The initialized Telegram Application object.",
+                        "lineNo": [
+                            {
+                                "lineno": 4,
+                                "end_lineno": 26
+                            }
+                        ],
+                        "borderColor": "rgb(0,192,255)"
+                    },
+                    "x": 143.60000610351562,
+                    "y": 175,
+                    "ports": [
+                        {
+                            "id": "5c7123db-376e-4062-ad99-c4b7acebead6",
+                            "type": "default",
+                            "extras": {},
+                            "x": 144.39998866445995,
+                            "y": 201.8000174008088,
+                            "name": "in-0",
+                            "alignment": "left",
+                            "parentNode": "2a537ec5-5a74-403b-a4de-2fe26703904e",
+                            "links": [
+                                "784991d8-a164-4407-9ed6-bd218e03bed9"
+                            ],
+                            "in": true,
+                            "label": "▶",
+                            "varName": "▶",
+                            "portType": "",
+                            "dataType": ""
+                        },
+                        {
+                            "id": "02a0eb86-aa99-4e62-9779-b28807540f5a",
+                            "type": "default",
+                            "extras": {},
+                            "x": 144.39998866445995,
+                            "y": 223.39998620506225,
+                            "name": "parameter-secret-telegram_token",
+                            "alignment": "left",
+                            "parentNode": "2a537ec5-5a74-403b-a4de-2fe26703904e",
+                            "links": [],
+                            "in": true,
+                            "label": "★telegram_token",
+                            "varName": "★telegram_token",
+                            "portType": "",
+                            "dataType": "secret"
+                        },
+                        {
+                            "id": "fc7243e7-3a78-416a-8fa3-e8cfca611d6c",
+                            "type": "default",
+                            "extras": {},
+                            "x": 332.22496696307104,
+                            "y": 201.8000174008088,
+                            "name": "out-0",
+                            "alignment": "right",
+                            "parentNode": "2a537ec5-5a74-403b-a4de-2fe26703904e",
+                            "links": [
+                                "db6ede42-7bab-4ee6-abbe-4626cb36f862"
+                            ],
+                            "in": false,
+                            "label": "▶",
+                            "varName": "▶",
+                            "portType": "",
+                            "dataType": ""
+                        },
+                        {
+                            "id": "0f60460d-68e2-4eab-873f-a7c255af73c5",
+                            "type": "default",
+                            "extras": {},
+                            "x": 332.22496696307104,
+                            "y": 223.39998620506225,
+                            "name": "parameter-out-any-application",
+                            "alignment": "right",
+                            "parentNode": "2a537ec5-5a74-403b-a4de-2fe26703904e",
+                            "links": [
+                                "135672c8-1af1-4e93-b07d-bf0a56d886da"
+                            ],
+                            "in": false,
+                            "label": "application",
+                            "varName": "application",
+                            "portType": "",
+                            "dataType": "any"
+                        }
+                    ],
+                    "name": "TelegramInitApp",
+                    "color": "blue",
+                    "portsInOrder": [
+                        "5c7123db-376e-4062-ad99-c4b7acebead6",
+                        "02a0eb86-aa99-4e62-9779-b28807540f5a"
+                    ],
+                    "portsOutOrder": [
+                        "fc7243e7-3a78-416a-8fa3-e8cfca611d6c",
+                        "0f60460d-68e2-4eab-873f-a7c255af73c5"
+                    ]
+                },
+                "10b6e181-296d-44e7-99e3-58ca1be6e611": {
+                    "id": "10b6e181-296d-44e7-99e3-58ca1be6e611",
+                    "type": "custom-node",
+                    "selected": false,
+                    "extras": {
+                        "type": "library_component",
+                        "path": "xai_components/xai_telegram/telegram_core_components.py",
+                        "description": "Runs the Telegram Application in polling mode.\nThis call is blocking until the user stops the execution.\n\n##### inPorts:\n- application (object): The Telegram Application (with any handlers attached).",
+                        "lineNo": [
+                            {
+                                "lineno": 66,
+                                "end_lineno": 82
+                            }
+                        ],
+                        "borderColor": "rgb(0,192,255)"
+                    },
+                    "x": 649.6000061035156,
+                    "y": 216,
+                    "ports": [
+                        {
+                            "id": "b87563dc-59db-49fb-a7f7-4017fde5ea61",
+                            "type": "default",
+                            "extras": {},
+                            "x": 650.4000836080364,
+                            "y": 242.80001061912475,
+                            "name": "in-0",
+                            "alignment": "left",
+                            "parentNode": "10b6e181-296d-44e7-99e3-58ca1be6e611",
+                            "links": [
+                                "4cc3c05e-c04d-42f8-b05b-66ced99e434a"
+                            ],
+                            "in": true,
+                            "label": "▶",
+                            "varName": "▶",
+                            "portType": "",
+                            "dataType": ""
+                        },
+                        {
+                            "id": "934a5949-7e3f-47a0-a6b8-16e9c0680659",
+                            "type": "default",
+                            "extras": {},
+                            "x": 650.4000836080364,
+                            "y": 264.4000133317984,
+                            "name": "parameter-any-application",
+                            "alignment": "left",
+                            "parentNode": "10b6e181-296d-44e7-99e3-58ca1be6e611",
+                            "links": [
+                                "02d9b4d9-ba07-4082-aedd-fc567e06bc77"
+                            ],
+                            "in": true,
+                            "label": "★application",
+                            "varName": "★application",
+                            "portType": "",
+                            "dataType": "any"
+                        },
+                        {
+                            "id": "41ba220e-1bb3-48f9-8e94-7d8f12892f10",
+                            "type": "default",
+                            "extras": {},
+                            "x": 789.4000564813002,
+                            "y": 242.80001061912475,
+                            "name": "out-0",
+                            "alignment": "right",
+                            "parentNode": "10b6e181-296d-44e7-99e3-58ca1be6e611",
+                            "links": [
+                                "3441d03d-5d3c-4b1f-b48a-99876def517d"
+                            ],
+                            "in": false,
+                            "label": "▶",
+                            "varName": "▶",
+                            "portType": "",
+                            "dataType": ""
+                        }
+                    ],
+                    "name": "TelegramRunApp",
+                    "color": "blue",
+                    "portsInOrder": [
+                        "b87563dc-59db-49fb-a7f7-4017fde5ea61",
+                        "934a5949-7e3f-47a0-a6b8-16e9c0680659"
+                    ],
+                    "portsOutOrder": [
+                        "41ba220e-1bb3-48f9-8e94-7d8f12892f10"
+                    ]
+                },
+                "8e6d3c97-b69b-4a3c-b4be-69a0d3912fd6": {
+                    "id": "8e6d3c97-b69b-4a3c-b4be-69a0d3912fd6",
+                    "type": "custom-node",
+                    "selected": false,
+                    "extras": {
+                        "type": "library_component",
+                        "path": "xai_components/xai_telegram/telegram_core_components.py",
+                        "description": "Adds an echo handler that echoes all text messages back to the user,\nexcept those that start with '/' (commands).\n\n##### inPorts:\n- application (object): The Telegram Application object (from InitTelegramApp).\n\n##### outPorts:\n- application (object): The updated Telegram Application with the echo handler attached.",
+                        "lineNo": [
+                            {
+                                "lineno": 30,
+                                "end_lineno": 62
+                            }
+                        ],
+                        "borderColor": "rgb(0,192,255)"
+                    },
+                    "x": 394.6000061035156,
+                    "y": 219,
+                    "ports": [
+                        {
+                            "id": "9568ed04-6543-44d3-8f7a-c6c398b52292",
+                            "type": "default",
+                            "extras": {},
+                            "x": 395.40001579119604,
+                            "y": 245.80002418249282,
+                            "name": "in-0",
+                            "alignment": "left",
+                            "parentNode": "8e6d3c97-b69b-4a3c-b4be-69a0d3912fd6",
+                            "links": [
+                                "db6ede42-7bab-4ee6-abbe-4626cb36f862"
+                            ],
+                            "in": true,
+                            "label": "▶",
+                            "varName": "▶",
+                            "portType": "",
+                            "dataType": ""
+                        },
+                        {
+                            "id": "fce5d816-743f-4299-8961-86d52cf0ecbb",
+                            "type": "default",
+                            "extras": {},
+                            "x": 395.40001579119604,
+                            "y": 267.39999298674627,
+                            "name": "parameter-any-application",
+                            "alignment": "left",
+                            "parentNode": "8e6d3c97-b69b-4a3c-b4be-69a0d3912fd6",
+                            "links": [
+                                "135672c8-1af1-4e93-b07d-bf0a56d886da"
+                            ],
+                            "in": true,
+                            "label": "★application",
+                            "varName": "★application",
+                            "portType": "",
+                            "dataType": "any"
+                        },
+                        {
+                            "id": "08f93a56-79bd-4ede-8685-40614f336f7d",
+                            "type": "default",
+                            "extras": {},
+                            "x": 581.412453399703,
+                            "y": 245.80002418249282,
+                            "name": "out-0",
+                            "alignment": "right",
+                            "parentNode": "8e6d3c97-b69b-4a3c-b4be-69a0d3912fd6",
+                            "links": [
+                                "4cc3c05e-c04d-42f8-b05b-66ced99e434a"
+                            ],
+                            "in": false,
+                            "label": "▶",
+                            "varName": "▶",
+                            "portType": "",
+                            "dataType": ""
+                        },
+                        {
+                            "id": "ece0fb99-6513-43f1-ba58-a75602ff7d63",
+                            "type": "default",
+                            "extras": {},
+                            "x": 581.412453399703,
+                            "y": 267.39999298674627,
+                            "name": "parameter-out-any-application_out",
+                            "alignment": "right",
+                            "parentNode": "8e6d3c97-b69b-4a3c-b4be-69a0d3912fd6",
+                            "links": [
+                                "02d9b4d9-ba07-4082-aedd-fc567e06bc77"
+                            ],
+                            "in": false,
+                            "label": "application_out",
+                            "varName": "application_out",
+                            "portType": "",
+                            "dataType": "any"
+                        }
+                    ],
+                    "name": "TelegramAddEchoHandler",
+                    "color": "blue",
+                    "portsInOrder": [
+                        "9568ed04-6543-44d3-8f7a-c6c398b52292",
+                        "fce5d816-743f-4299-8961-86d52cf0ecbb"
+                    ],
+                    "portsOutOrder": [
+                        "08f93a56-79bd-4ede-8685-40614f336f7d",
+                        "ece0fb99-6513-43f1-ba58-a75602ff7d63"
+                    ]
+                }
+            }
+        }
+    ]
+}
