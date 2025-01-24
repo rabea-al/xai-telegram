@@ -5,6 +5,7 @@ from telegram import Update
 from telegram.constants import ParseMode
 from telegram.ext import CommandHandler, MessageHandler, filters, ContextTypes
 
+
 @xai_component(color="blue")
 class TelegramInitApp(Component):
     """
@@ -28,6 +29,9 @@ class TelegramInitApp(Component):
         
         app = ApplicationBuilder().token(token).build()
         self.application.value = app
+        
+        # Store the application in the context for global access
+        ctx['telegram_app'] = app
 
 
 @xai_component(color="blue")
@@ -55,7 +59,10 @@ class TelegramAddEchoHandler(Component):
                     text=update.message.text
                 )
 
-        app = self.application.value
+        app = self.application.value or ctx.get('telegram_app')  # Retrieve from ctx if not provided
+        if not app:
+            raise ValueError("Telegram Application not found in input or context!")
+        
         # Create a filter that grabs all text messages except commands (i.e., no leading '/')
         echo_handler = MessageHandler(filters.TEXT & (~filters.COMMAND), echo)
         app.add_handler(echo_handler)
@@ -73,15 +80,16 @@ class TelegramRunApp(Component):
     ##### inPorts:
     - application (object): The Telegram Application (with any handlers attached).
     """
-    application: InCompArg[any]
+    application: InArg[any]
 
     def execute(self, ctx) -> None:
-        app = self.application.value
+        app = self.application.value or ctx.get('telegram_app')  # Retrieve from ctx if not provided
         if not app:
-            raise ValueError("No Telegram Application provided!")
+            raise ValueError("Telegram Application not found in input or context!")
         
         # This is a blocking call, so Xircuits execution will pause here until you stop the bot.
         app.run_polling()
+
 
 @xai_component(color="green")
 class TelegramAddCommandEvent(Component):
@@ -103,14 +111,15 @@ class TelegramAddCommandEvent(Component):
     application_out: OutArg[object]
 
     def execute(self, ctx) -> None:
+        app = self.application.value or ctx.get('telegram_app')  # Retrieve from ctx if not provided
+        if not app:
+            raise ValueError("Telegram Application not found in input or context!")
 
-        app = self.application.value
         cmd = self.command_name.value.strip()
         evt = self.event_name.value.strip()
 
-        if not (app and cmd and evt):
-            raise ValueError("Application, command_name, and event_name are required.")
-
+        if not (cmd and evt):
+            raise ValueError("command_name and event_name are required.")
 
         async def command_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             # This is called each time user does /<cmd>.
@@ -118,9 +127,6 @@ class TelegramAddCommandEvent(Component):
             chat_id = update.effective_chat.id
             user_id = update.effective_user.id if update.effective_user else None
 
-            # We "fire" an event. Instead of calling FireEvent directly as a component,
-            # we can replicate FireEvent logic or we can store something in ctx and run it.
-            # For simplicity, let's replicate the logic:
             payload = {
                 "command_name": cmd,
                 "message_text": message_text,
@@ -128,16 +134,13 @@ class TelegramAddCommandEvent(Component):
                 "user_id": user_id,
                 "update": update,
             }
-            # Check if there's a list of OnEvent listeners
             listeners = ctx.get('events', {}).get(evt, [])
             for listener in listeners:
                 listener.payload.value = payload
-                # Call do() on the OnEvent. That calls SubGraphExecutor on its body.
                 SubGraphExecutor(listener).do(ctx)
 
         handler = CommandHandler(cmd, command_callback)
         app.add_handler(handler)
-
         self.application_out.value = app
 
 @xai_component
@@ -205,37 +208,26 @@ class TelegramReplyToMessageEvent(Component):
 
     ##### outPorts:
     None
-
-    ##### Usage (Event-Based):
-    1. An event is triggered (e.g. /start command), providing a payload with 'update'.
-    2. In a subgraph, wire that event payload into this component’s `event_payload`.
-    3. Supply a `reply_text` literal or from another component to finalize the message.
     """
     application: InArg[object]
     event_payload: InArg[dict]
     reply_text: InArg[str]
 
     def execute(self, ctx) -> None:
-        
-        app = self.application.value
+        app = self.application.value or ctx.get('telegram_app')  # Retrieve from ctx if not provided
         payload = self.event_payload.value
         reply_text = self.reply_text.value
 
         if not app:
-            print("[TelegramReplyToMessage] No Telegram Application found!")
-            return
+            raise ValueError("Telegram Application not found in input or context!")
         if not payload:
-            print("[TelegramReplyToMessage] No event_payload provided, can't reply.")
-            return
+            raise ValueError("No event_payload provided, can't reply.")
 
-        # Expecting the Telegram 'update' object to be in the event payload
         update = payload.get('update')
         if not update:
-            print("[TelegramReplyToMessage] No 'update' in event_payload, cannot reply.")
-            return
+            raise ValueError("No 'update' in event_payload, cannot reply.")
 
         chat_id = update.effective_chat.id
-        # If you want to quote the original message, we need the message_id
         message_id = update.effective_message.message_id
         
         async def _send_reply():
