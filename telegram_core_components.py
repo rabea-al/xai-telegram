@@ -2,7 +2,7 @@ from xai_components.base import InArg, OutArg, InCompArg, Component, xai_compone
 
 import asyncio
 from telegram import Update
-from telegram.constants import ParseMode
+from telegram.constants import ChatType, ParseMode
 from telegram.ext import CommandHandler, MessageHandler, filters, ContextTypes
 
 
@@ -91,6 +91,88 @@ class TelegramRunApp(Component):
         app.run_polling()
 
 
+@xai_component(color="blue")
+class TelegramAddMessageEvent(Component):
+    """
+    A unified component that handles text messages under two modes:
+
+    1) require_bot_mention = True (Default):
+       - In private chats, all text is handled (no mention needed).
+       - In group chats, only messages @mentioning the bot are handled.
+    2) require_bot_mention = False:
+       - In all chats (group or private), all text messages are handled.
+
+    You must supply `bot_username` if you enable mentions, e.g. 'MyBotUsername'.
+    Leading '@' is optional.
+
+    #### inPorts:
+    - application (object): Telegram Application (from TelegramInitApp).
+    - event_name (str): Xircuits event name to fire.
+    - require_bot_mention (bool): Default True. If True, only handle messages if
+      private chat OR the user mentions the bot. If False, handle all text messages.
+    - bot_username (str): The bot's username, e.g. "MyBotUsername" (optional if
+      require_bot_mention=False, required if True).
+
+    #### outPorts:
+    - application_out (object): Updated Telegram application with the message handler.
+
+    """
+
+    application: InArg[object]
+    event_name: InArg[str]
+    require_bot_mention: InArg[bool]
+    bot_username: InArg[str]
+
+    application_out: OutArg[object]
+
+    def execute(self, ctx) -> None:
+        app = self.application.value or ctx.get('telegram_app')
+        if not app:
+            raise ValueError("Telegram Application not found in input or context!")
+
+        event_name = (self.event_name.value or "").strip()
+        if not event_name:
+            raise ValueError("event_name is required to trigger subgraphs.")
+
+        require_mention = self.require_bot_mention.value
+        if require_mention is None:
+            require_mention = True
+
+        # Build the filter
+        if require_mention:
+            # Must have the bot username
+            username = self.bot_username.value
+            if not username:
+                raise ValueError(
+                    "bot_username is required when require_bot_mention is True."
+                )
+            # Mention filter
+            mention_filter = filters.Mention(username)
+            # Combine mention in group OR private chat
+            combined_filter = (mention_filter | filters.ChatType.PRIVATE) & filters.TEXT
+        else:
+            # Respond to all text in any chat
+            combined_filter = filters.TEXT
+
+        async def _callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
+            if update.message and update.message.text:
+                payload = {
+                    "update": update,
+                    "chat_id": update.effective_chat.id,
+                    "user_id": update.effective_user.id if update.effective_user else None,
+                    "text": update.message.text,
+                    "is_command": update.message.text.startswith('/'),
+                }
+                # Trigger the event in Xircuits
+                listeners = ctx.get('events', {}).get(event_name, [])
+                for listener in listeners:
+                    listener.payload.value = payload
+                    SubGraphExecutor(listener).do(ctx)
+
+        handler = MessageHandler(combined_filter, _callback)
+        app.add_handler(handler)
+        self.application_out.value = app
+
 @xai_component(color="green")
 class TelegramAddCommandEvent(Component):
     """
@@ -147,12 +229,15 @@ class TelegramAddCommandEvent(Component):
 class TelegramParsePayload(Component):
     """
     Unpacks the standard Telegram payload fields from an event payload dictionary.
+    This component now handles both normal messages ("text") and command messages
+    ("message_text"), pulling whichever is present.
 
     ##### inPorts:
     - event_payload (dict): A dictionary containing keys like:
         {
+          "text": str,           # For normal messages
+          "message_text": str,   # For commands
           "command_name": str,
-          "message_text": str,
           "chat_id": int,
           "user_id": int,
           "update": <telegram.Update>
@@ -162,15 +247,17 @@ class TelegramParsePayload(Component):
     ##### outPorts:
     - chat_id (int): The chat ID where the message was sent.
     - user_id (int): The user's Telegram ID.
-    - message_text (str): The text after the command or the user's message text.
+    - message_text (str): The user's message text or command arguments (whichever is present).
     - update_obj (object): The entire Update object (telegram.Update).
     - command_name (str): The command name (if provided in payload).
     - first_name (str): The first_name from update.effective_user (if available).
 
     ##### Usage:
-    1. Wire the `event_payload` from an event-based component (e.g. OnEvent) into `TelegramParsePayload`.
+    1. Wire the `event_payload` from an event-based component (e.g. TelegramAddMessageEvent or
+       TelegramAddCommandEvent) into `TelegramParsePayload`.
     2. Use the outPorts (chat_id, message_text, etc.) in subsequent components.
     """
+
     event_payload: InArg[dict]
 
     chat_id: OutArg[int]
@@ -184,11 +271,17 @@ class TelegramParsePayload(Component):
         payload = self.event_payload.value or {}
         self.chat_id.value = payload.get("chat_id")
         self.user_id.value = payload.get("user_id")
-        self.message_text.value = payload.get("message_text")
+
+        # Handle both normal messages ("text") and commands ("message_text")
+        msg_text = payload.get("message_text")
+        if not msg_text:
+            msg_text = payload.get("text")
+
+        self.message_text.value = msg_text
         self.update_obj.value = payload.get("update")
         self.command_name.value = payload.get("command_name")
 
-        # Optionally derive `first_name` from the update if user data is in the payload
+        # Optionally derive `first_name` from the update if user data is available
         first_name = ""
         update = payload.get("update")
         if update and update.effective_user:
