@@ -30,7 +30,6 @@ class TelegramInitApp(Component):
         app = ApplicationBuilder().token(token).build()
         self.application.value = app
         
-        # Store the application in the context for global access
         ctx['telegram_app'] = app
 
 
@@ -67,7 +66,6 @@ class TelegramAddEchoHandler(Component):
         echo_handler = MessageHandler(filters.TEXT & (~filters.COMMAND), echo)
         app.add_handler(echo_handler)
         
-        # Pass the updated app forward
         self.application_out.value = app
 
 
@@ -83,11 +81,10 @@ class TelegramRunApp(Component):
     application: InArg[any]
 
     def execute(self, ctx) -> None:
-        app = self.application.value or ctx.get('telegram_app')  # Retrieve from ctx if not provided
+        app = self.application.value or ctx.get('telegram_app')
         if not app:
             raise ValueError("Telegram Application not found in input or context!")
         
-        # This is a blocking call, so Xircuits execution will pause here until you stop the bot.
         app.run_polling()
 
 
@@ -160,6 +157,7 @@ class TelegramAddMessageEvent(Component):
                     "update": update,
                     "chat_id": update.effective_chat.id,
                     "user_id": update.effective_user.id if update.effective_user else None,
+                    "message_id": update.effective_message.message_id if update.effective_message else None,
                     "text": update.message.text,
                     "is_command": update.message.text.startswith('/'),
                 }
@@ -193,7 +191,7 @@ class TelegramAddCommandEvent(Component):
     application_out: OutArg[object]
 
     def execute(self, ctx) -> None:
-        app = self.application.value or ctx.get('telegram_app')  # Retrieve from ctx if not provided
+        app = self.application.value or ctx.get('telegram_app')
         if not app:
             raise ValueError("Telegram Application not found in input or context!")
 
@@ -208,12 +206,14 @@ class TelegramAddCommandEvent(Component):
             message_text = " ".join(context.args) if context.args else ""
             chat_id = update.effective_chat.id
             user_id = update.effective_user.id if update.effective_user else None
+            message_id = update.effective_message.message_id if update.effective_message else None
 
             payload = {
                 "command_name": cmd,
                 "message_text": message_text,
                 "chat_id": chat_id,
                 "user_id": user_id,
+                "message_id": message_id,
                 "update": update,
             }
             listeners = ctx.get('events', {}).get(evt, [])
@@ -226,36 +226,25 @@ class TelegramAddCommandEvent(Component):
         self.application_out.value = app
 
 @xai_component
-class TelegramParsePayload(Component):
+class TelegramParseMessagePayload(Component):
     """
-    Unpacks the standard Telegram payload fields from an event payload dictionary.
-    This component now handles both normal messages ("text") and command messages
-    ("message_text"), pulling whichever is present.
+    Parses payloads specifically for Telegram normal messages.
 
     ##### inPorts:
     - event_payload (dict): A dictionary containing keys like:
         {
-          "text": str,           # For normal messages
-          "message_text": str,   # For commands
-          "command_name": str,
-          "chat_id": int,
-          "user_id": int,
+          "text": str,        # Normal message text
+          "chat_id": int,     # Chat ID
+          "user_id": int,     # User ID
           "update": <telegram.Update>
-          ...
         }
 
     ##### outPorts:
     - chat_id (int): The chat ID where the message was sent.
     - user_id (int): The user's Telegram ID.
-    - message_text (str): The user's message text or command arguments (whichever is present).
+    - message_text (str): The user's message text.
     - update_obj (object): The entire Update object (telegram.Update).
-    - command_name (str): The command name (if provided in payload).
     - first_name (str): The first_name from update.effective_user (if available).
-
-    ##### Usage:
-    1. Wire the `event_payload` from an event-based component (e.g. TelegramAddMessageEvent or
-       TelegramAddCommandEvent) into `TelegramParsePayload`.
-    2. Use the outPorts (chat_id, message_text, etc.) in subsequent components.
     """
 
     event_payload: InArg[dict]
@@ -264,30 +253,73 @@ class TelegramParsePayload(Component):
     user_id: OutArg[int]
     message_text: OutArg[str]
     update_obj: OutArg[object]
-    command_name: OutArg[str]
     first_name: OutArg[str]
 
     def execute(self, ctx) -> None:
         payload = self.event_payload.value or {}
         self.chat_id.value = payload.get("chat_id")
         self.user_id.value = payload.get("user_id")
-
-        # Handle both normal messages ("text") and commands ("message_text")
-        msg_text = payload.get("message_text")
-        if not msg_text:
-            msg_text = payload.get("text")
-
-        self.message_text.value = msg_text
+        self.message_text.value = payload.get("text")
         self.update_obj.value = payload.get("update")
-        self.command_name.value = payload.get("command_name")
 
-        # Optionally derive `first_name` from the update if user data is available
+        # Extract first_name if available
         first_name = ""
         update = payload.get("update")
         if update and update.effective_user:
             first_name = update.effective_user.first_name or ""
         self.first_name.value = first_name
 
+@xai_component
+class TelegramParseCommandPayload(Component):
+    """
+    Parses payloads specifically for Telegram command messages.
+
+    ##### inPorts:
+    - event_payload (dict): A dictionary containing keys like:
+        {
+          "message_text": str,   # Command text including arguments
+          "command_name": str,   # Command name
+          "chat_id": int,        # Chat ID
+          "user_id": int,        # User ID
+          "update": <telegram.Update>
+        }
+
+    ##### outPorts:
+    - chat_id (int): The chat ID where the command was sent.
+    - user_id (int): The user's Telegram ID.
+    - message_id (int): The message effective id.
+    - command_name (str): The command name.
+    - message_text (str): Command arguments (if any).
+    - update_obj (object): The entire Update object (telegram.Update).
+    - first_name (str): The first_name from update.effective_user (if available).
+    """
+
+    event_payload: InArg[dict]
+
+    chat_id: OutArg[int]
+    user_id: OutArg[int]
+    message_id: OutArg[int]
+    command_name: OutArg[str]
+    message_text: OutArg[str]
+    update_obj: OutArg[object]
+    first_name: OutArg[str]
+
+    def execute(self, ctx) -> None:
+        payload = self.event_payload.value or {}
+        print(payload)
+        self.chat_id.value = payload.get("chat_id")
+        self.user_id.value = payload.get("user_id")
+        self.message_id.value = payload.get("message_id")
+        self.command_name.value = payload.get("command_name")
+        self.message_text.value = payload.get("message_text")
+        self.update_obj.value = payload.get("update")
+
+        # Extract first_name if available
+        first_name = ""
+        update = payload.get("update")
+        if update and update.effective_user:
+            first_name = update.effective_user.first_name or ""
+        self.first_name.value = first_name
 
 @xai_component(color="green")
 class TelegramReplyToMessageEvent(Component):
@@ -298,16 +330,13 @@ class TelegramReplyToMessageEvent(Component):
     - application (object): Telegram Application object
     - event_payload (dict): The payload containing info such as 'update', 'chat_id', etc.
     - reply_text (str): The text you want to send as a reply
-
-    ##### outPorts:
-    None
     """
     application: InArg[object]
     event_payload: InArg[dict]
     reply_text: InArg[str]
 
     def execute(self, ctx) -> None:
-        app = self.application.value or ctx.get('telegram_app')  # Retrieve from ctx if not provided
+        app = self.application.value or ctx.get('telegram_app')
         payload = self.event_payload.value
         reply_text = self.reply_text.value
 
