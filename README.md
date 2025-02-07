@@ -18,6 +18,11 @@
 
 This library enables Xircuits to integrate with Telegram, allowing seamless interaction with Telegram bots. It simplifies bot initialization, message handling, and various types of media sharing.
 
+
+## Preview
+
+https://github.com/user-attachments/assets/2bcef69d-e1c3-4735-80e9-946ab64ebd9f
+
 ## Table of Contents
 
 - [Prerequisites](#prerequisites)
@@ -59,16 +64,15 @@ pip install -r xai_components/xai_telegram/requirements.txt
    - Choose a username (must end in 'bot')
 4. BotFather will provide a token - save this securely
 
-### Bot Token Format
-- Looks like: `110201543:AAHdqTcvCH1vGWJxfSeofSAs0K5PALDsaw`
+### Bot Token
 - Keep this token secure - anyone with the token can control your bot
+- export this token or create a .env file with TELEGRAM_BOT_KEY=YOUR_TOKEN.
 
 ### Important Notes
 - Bot usernames must end in 'bot' (e.g., 'tetris_bot' or 'TetrisBot')
 - Usernames are 5-32 characters long
 - Only Latin characters, numbers, and underscores are allowed
 - Username cannot be changed after creation
-
 
 ## Examples
 
