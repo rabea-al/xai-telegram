@@ -8,6 +8,10 @@ readme = "README.md"
 repository = "https://github.com/XpressAI/xai-telegram"
 keywords = ["xircuits", "telegram"]
 
+dependencies = [
+    "python-telegram-bot==21.10",
+]
+
 # Xircuits-specific configurations
 [tool.xircuits]
 default_example_path = "examples/TelegramEchoBot.xircuits"
