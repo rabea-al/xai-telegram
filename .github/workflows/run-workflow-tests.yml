@@ -15,8 +15,9 @@ jobs:
       matrix:
         python-version: ["3.9", "3.10", "3.11"]
     env:
-      TEST_XIRCUITS: |
-        examples/TelegramEchoBot.xircuits
+      TEST_XIRCUITS: examples/TelegramEchoBot.xircuits
+      TELEGRAM_BOT_KEY: ${{ secrets.TELEGRAM_BOT_KEY }}
+
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v4
