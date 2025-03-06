@@ -18,16 +18,17 @@
 
 This library enables Xircuits to integrate with Telegram, allowing seamless interaction with Telegram bots. It simplifies bot initialization, message handling, and various types of media sharing.
 
+## Table of Contents
+
+- [Preview](#preview)
+- [Prerequisites](#prerequisites)
+- [Try the Examples](#try-the-examples)
+- [Telegram Bot Setup](#telegram-bot-setup)
+- [Installation](#installation)
 
 ## Preview
 
 https://github.com/user-attachments/assets/2bcef69d-e1c3-4735-80e9-946ab64ebd9f
-
-## Table of Contents
-
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
-- [Telegram Bot Setup](#telegram-bot-setup)
 
 ## Prerequisites
 
@@ -37,21 +38,28 @@ Before you begin, you will need:
 2. Xircuits
 3. A Telegram Bot Token
 
-## Installation
 
-To use this component library, ensure you have an existing [Xircuits setup](https://xircuits.io/docs/main/Installation). You can then install this library using:
+## Try The Examples
 
-```bash
-xircuits install telegram
-```
+We have provided an example workflow to help you get started with the Telegram component library. Give it a try and see how you can create custom Telegram components for your applications.
 
-Or manually:
+### TelegramEchoBot
+Simple bot that echoes back any message it receives - perfect for understanding the basic bot setup.
 
-```bash
-# in base Xircuits directory
-git clone https://github.com/XpressAI/xai-telegram xai_components/xai_telegram
-pip install -r xai_components/xai_telegram/requirements.txt
-```
+### TelegramMessageReplyBot
+Demonstrates how to use Xircuits events to create custom message handling and responses.
+
+### TelegramCommandBot
+Shows how to implement command-based interactions (e.g., `/start`, `/help`) with argument parsing.
+
+### TelegramReplyMedia
+Showcases how to send various media types (images, PDFs, audio, video) in response to messages.
+
+## Coming Soon (TBA)
+
+- Enhanced group chat support (currently optimized for 1-1 chats)
+- Media reception capabilities (currently supports sending media only)
+- Other cool stuff
 
 ## Telegram Bot Setup
 
@@ -74,25 +82,20 @@ pip install -r xai_components/xai_telegram/requirements.txt
 - Only Latin characters, numbers, and underscores are allowed
 - Username cannot be changed after creation
 
-## Examples
 
-### TelegramEchoBot
-Simple bot that echoes back any message it receives - perfect for understanding the basic bot setup.
+## Installation
 
-### TelegramMessageReplyBot
-Demonstrates how to use Xircuits events to create custom message handling and responses.
+To use this component library, ensure you have an existing [Xircuits setup](https://xircuits.io/docs/main/Installation). You can then install this library using:
 
-### TelegramCommandBot
-Shows how to implement command-based interactions (e.g., `/start`, `/help`) with argument parsing.
+```bash
+xircuits install telegram
+```
 
-### TelegramReplyMedia
-Showcases how to send various media types (images, PDFs, audio, video) in response to messages.
+Or manually:
 
-## Coming Soon (TBA)
+```bash
+# in base Xircuits directory
+git clone https://github.com/XpressAI/xai-telegram xai_components/xai_telegram
+pip install -r xai_components/xai_telegram/requirements.txt
+```
 
-- Enhanced group chat support (currently optimized for 1-1 chats)
-- Media reception capabilities (currently supports sending media only)
-- Other cool stuff
-
-## Support & Community
-Join our [Discord community](https://discord.gg/vgEg2ZtxCw) for support and discussions.
